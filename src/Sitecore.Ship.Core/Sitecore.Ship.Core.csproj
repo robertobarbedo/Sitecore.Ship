@@ -56,6 +56,7 @@
     <Compile Include="Contracts\ICheckRequests.cs" />
     <Compile Include="Contracts\IConfigurationProvider.cs" />
     <Compile Include="Contracts\IInstallationRecorder.cs" />
+    <Compile Include="Contracts\IJobTracker.cs" />
     <Compile Include="Contracts\ILog.cs" />
     <Compile Include="Contracts\IPackageHistoryRepository.cs" />
     <Compile Include="Contracts\IPackageManifestRepository.cs" />
@@ -68,6 +69,7 @@
     <Compile Include="Contracts\IPublishService.cs" />
     <Compile Include="Domain\InstallUploadPackage.cs" />
     <Compile Include="Domain\ItemsToPublish.cs" />
+    <Compile Include="Domain\JobConstants.cs" />
     <Compile Include="Domain\PackageManifest.cs" />
     <Compile Include="Domain\PackageManifestEntry.cs" />
     <Compile Include="Domain\PublishLastCompleted.cs" />

@@ -14,9 +14,15 @@ namespace Sitecore.Ship.AspNet
 
             var aboutCommand = new AboutCommand();
 
+            var isJobRunningCommand = new IsJobRunningCommand();
+
+            var installStatusCommand = new InstallStatusCommand();
+
             var installPackageCommand = new InstallPackageCommand();
 
             var installUploadPackageCommand = new InstallUploadPackageCommand();
+
+            var installUploadPackageAsyncCommand = new InstallUploadPackageAsyncCommand();
 
             var latestVersionCommand = new LatestVersionCommand();
 
@@ -26,11 +32,17 @@ namespace Sitecore.Ship.AspNet
 
             var unhandledCommand = new UnhandledCommand();
 
-            aboutCommand.SetSuccessor(installPackageCommand);
+            aboutCommand.SetSuccessor(isJobRunningCommand);
+
+            isJobRunningCommand.SetSuccessor(installStatusCommand);
+
+            installStatusCommand.SetSuccessor(installPackageCommand);
 
             installPackageCommand.SetSuccessor(installUploadPackageCommand);
 
-            installUploadPackageCommand.SetSuccessor(latestVersionCommand);
+            installUploadPackageCommand.SetSuccessor(installUploadPackageAsyncCommand);
+
+            installUploadPackageAsyncCommand.SetSuccessor(latestVersionCommand);
 
             latestVersionCommand.SetSuccessor(invokePublishingCommand);
 

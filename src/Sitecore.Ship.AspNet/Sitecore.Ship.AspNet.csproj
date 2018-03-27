@@ -60,7 +60,10 @@
     <Compile Include="BaseHttpHandler.cs" />
     <Compile Include="CommandHandler.cs" />
     <Compile Include="Package\InstallPackageCommand.cs" />
+    <Compile Include="Package\InstallStatusCommand.cs" />
+    <Compile Include="Package\InstallUploadPackageAsyncCommand.cs" />
     <Compile Include="Package\InstallUploadPackageCommand.cs" />
+    <Compile Include="Package\IsJobRunningCommand.cs" />
     <Compile Include="Publish\InvokePublishingCommand.cs" />
     <Compile Include="Package\LatestVersionCommand.cs" />
     <Compile Include="Publish\PublishingLastCompletedCommand.cs" />
