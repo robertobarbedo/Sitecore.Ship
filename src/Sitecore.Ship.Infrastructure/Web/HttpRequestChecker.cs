@@ -12,7 +12,14 @@ namespace Sitecore.Ship.Infrastructure.Web
 
         public string UserHostAddress
         {
-            get { return HttpContext.Current.Request.UserHostAddress; }
+            get
+            {
+                var header = Sitecore.Configuration.Settings.GetSetting("SitecoreShip.AuthenticateWith.HTTPHeader", "");
+                if (string.IsNullOrWhiteSpace(header))
+                    return HttpContext.Current.Request.UserHostAddress;
+                else
+                    return HttpContext.Current.Request.ServerVariables[header];
+            }
         }
     }
 }

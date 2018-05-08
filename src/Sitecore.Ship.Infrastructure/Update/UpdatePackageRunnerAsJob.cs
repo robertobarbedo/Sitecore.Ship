@@ -80,8 +80,6 @@ namespace Sitecore.Ship.Infrastructure.Update
                     Sitecore.Configuration.Settings.Indexing.Enabled = false;
                 }
 
-                //System.Threading.Thread.Sleep(1000 * 20); //REMOVE REMOVE REMOVE !!!!
-
                 var installationInfo = GetInstallationInfo(packagePath);
                 string historyPath = null;
                 List<ContingencyEntry> entries = null;
