@@ -41,9 +41,12 @@ namespace Sitecore.Ship.Infrastructure.Update
             {
                 AfterLife = TimeSpan.FromMinutes(10),
                 WriteToLog = true,
-                CustomData = id,
-                JobDisplayName = JobConstants.JobName + " - " + id
+                CustomData = id
             };
+
+#if !Sitecore81
+            jobOptions.JobDisplayName = JobConstants.JobName + " - " + id;
+#endif
 
             // invoke the job
             Sitecore.Jobs.Job job = Sitecore.Jobs.JobManager.Start(jobOptions);
@@ -63,7 +66,11 @@ namespace Sitecore.Ship.Infrastructure.Update
                 if (job != null)
                 {
                     job.Status.Failed = true;
+#if Sitecore81
+                    job.Options.CustomData = ex;
+#else
                     job.Status.Exceptions.Add(ex);
+#endif
                 }
                 return null;
             }
@@ -162,9 +169,13 @@ namespace Sitecore.Ship.Infrastructure.Update
             {
                 Mode = InstallMode.Install,
                 Action = UpgradeAction.Upgrade,
-                Path = packagePath,
-                ProcessingMode = ProcessingMode.All
+                Path = packagePath
             };
+
+#if !Sitecore81
+            info.ProcessingMode = ProcessingMode.All;
+#endif
+
             if (string.IsNullOrEmpty(info.Path))
             {
                 throw new Exception("Package is not selected.");

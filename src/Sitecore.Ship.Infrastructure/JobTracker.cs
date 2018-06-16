@@ -43,7 +43,15 @@ namespace Sitecore.Ship.Infrastructure
             }
             else if (job.IsDone && job.Status.Failed)
             {
+
+#if Sitecore81
+                if (job?.Options?.CustomData != null && job.Options.CustomData is Exception)
+                {
+                    this.exception = new List<Exception>() { (Exception)job.Options.CustomData };
+                }
+#else
                 this.exception = job.Status.Exceptions;
+#endif
                 return JobConstants.Error;
             }
             else if (job.Status.State == Jobs.JobState.Queued)
