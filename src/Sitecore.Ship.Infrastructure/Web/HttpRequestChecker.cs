@@ -16,10 +16,20 @@ namespace Sitecore.Ship.Infrastructure.Web
             {
                 var header = Sitecore.Configuration.Settings.GetSetting("SitecoreShip.AuthenticateWith.HTTPHeader", "");
                 if (string.IsNullOrWhiteSpace(header))
-                    return HttpContext.Current.Request.UserHostAddress;
+                    return ParseIP(HttpContext.Current.Request.UserHostAddress);
                 else
-                    return HttpContext.Current.Request.ServerVariables[header];
+                    return ParseIP(HttpContext.Current.Request.Headers[header] ?? HttpContext.Current.Request.ServerVariables[header]);
             }
+        }
+
+        protected virtual string ParseIP(string ip)
+        {
+            if (string.IsNullOrWhiteSpace(ip))
+                return ip;
+            else if (ip.IndexOf(":") < 0)
+                return ip;
+            else
+                return ip.Split(':')[0];
         }
     }
 }
